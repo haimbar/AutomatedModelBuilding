@@ -1,4 +1,4 @@
-source("initSim.R")
+source("initSim.R") ##\label{Comment} set up some global parameters \small\dcircle{5} \small\ding{182};
 N <- 4000
 x <- runif(N,min=0,max=4*pi)
 y <- sin(x) + 1.5*x + rnorm(N, 0, 0.5)

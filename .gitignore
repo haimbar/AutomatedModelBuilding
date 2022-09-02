@@ -43,9 +43,10 @@ Rplots.pdf
 *.fdb_latexmk
 *.fls
 *.pax
+*.mw
 
 tmp
-serverPID.txt
+serverPID*.txt
 Rdebug.txt
 R.config
 talk2stat.log

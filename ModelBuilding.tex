@@ -1,0 +1,55 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+%\usepackage[square,sort,comma]{natbib}
+\usepackage[R,stopserver]{runcode}
+\setminted[R]{fontsize=\footnotesize,linenos=none, frame=single, bgcolor=bg, breaklines=true,escapeinside=\#;}
+\usepackage{pifont} % ding
+%\usepackage{circledsteps}
+
+\newcommand{\dcircle}[1]{\ding{\numexpr181 + #1}}
+
+\usepackage{caption}
+%\usepackage{subcaption}
+\usepackage{subfig}
+
+% Title Page
+\title{Automated Model Building and Goodness-of-fit via Quantile Regression}
+\author{Haim Bar}
+
+
+\begin{document}
+\maketitle
+
+\section{Simulated Data}
+\subsection{Assessing Goodness of Fit}
+The following code shows a simulation scenario\footnote{In the examples in this documentation, the simulation numbers refer to Tables A3 and A4 in our paper} in which the relationship between $x$ and $y$ is quadratic, and the error variance increases with $x$. The model is specified in line 14.
+We use QREM to fit the data twice -- once with the correct model (line 18) and once with an incorrect model, where only a linear relationship is assumed (line 19).
+ 
+\showCode{R}{Code/Univariate01.R}[1][10]
+
+\ref{Comment} is a comment
+%\runR{Sim23.R}{sim23}[cache]
+% 
+% 
+% \begin{figure}[t!]
+% \centering
+% \subfloat[\centering correct (quadratic) model]{\includegraphics[width=.4\linewidth]{generated/sim23q10correct.pdf}}
+% \subfloat[\centering incorrect (linear) model]{\includegraphics[width=.4\linewidth]{generated/sim23q10incorrect.pdf}}
+% \caption{Simulation 23 -- Diagnostic plot using the \texttt{QRdiagnostics} function. The true model is $y \sim N(6x^2 + x +120, (0.1+0.5x)^2))$}\label{sim23}
+% \end{figure}
+% 
+% 
+% \runR{Sim25.R}{sim25}[cache]
+%  \includeOutput{sim25}[tex]	
+
+
+%\clearpage
+\bibliographystyle{abbrvnat}
+\begin{thebibliography}{99}
+\bibitem{SEMMS}
+{\rm Bar, H.~Y., Booth, J.~G., {\rm and} Wells, M.~T.} (2020).
+\newblock {A Scalable Empirical Bayes Approach to Variable Selection in
+  Generalized Linear Models}.
+\newblock \emph{Journal of Computational and Graphical Statistics}, {\bf  0}\penalty0 (0), \penalty0 1--12.
+\end{thebibliography}
+\end{document}
