@@ -67,7 +67,6 @@ updateSelection <- function(deg, inModel, goodFit) {
 }
 
 
-# use goodFit?
 selectNext <- function(inModel, degrees, pvals, goodFit) {
   candidates <- which(inModel == 0)
   degs <- apply(degrees, 1, sum)

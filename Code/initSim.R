@@ -1,10 +1,10 @@
 rm(list = ls())
-source("runQREM.R")
+source("Code/runQREM.R")
 qns <- 1:5/6
 k <- length(qns)
-alphaQ <- 0.01
-maxdeg <- 15
-mxm <- 30
-plotit <- TRUE
 minDiff <- 4
+maxdeg <- 15
 maxrows <- 5000
+mxm <- 30
+alphaQ <- 0.01
+plotit <- FALSE
