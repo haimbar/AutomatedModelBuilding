@@ -1,4 +1,4 @@
-source("initSim.R")
+source("Code/initSim.R")
 set.seed(211013)
 qns <- as.numeric(format(qns, digits = 2))
 plotit <- TRUE

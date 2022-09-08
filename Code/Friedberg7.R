@@ -1,4 +1,5 @@
-source("initSim.R")
+source("Code/initSim.R")
+# takes a few minutes to run
 set.seed(211013)
 plotit <- FALSE
 maxrows <- 5000
@@ -16,10 +17,14 @@ y <- 10*sin(pi*M[,1]*M[,2]) + 20*(M[,3]-0.5)^2 + 10*M[,4] + 5*M[,5] + rnorm(N, 0
 M <- as.data.frame(cbind(y, M))
 colnames(M) <- c("y", paste0("x", 1:d))
 res <- fitQRloop(M=M, qn = qns, maxdeg = maxdeg, minDiff = minDiff, maxrows = maxrows)
+slctd <- res$frmlterms
 
+pdf("Figures/Friedberg7.pdf", width=5, height=5)
 i <- which(qns == 0.5)
 plot(M$y, res$qremFit[[3]]$fitted.mod$fitted.values, cex=0.6, pch=19,
      col="grey66", xlab="Observed y", ylab="Predicted", axes=F)
-abline(0,1, lwd=2, col="orange"); axis(1); axis(2); grid()
+abline(0, 1, lwd=2, col="orange"); axis(1); axis(2); grid()
 print(summary(lm(res$qremFit[[3]]$fitted.mod$fitted.values ~ M$y)))
-print(res$frmlterms)
+fittedModel <- paste(slctd, collapse=" + ")
+cat("Fitted model:", fittedModel)
+dev.off()

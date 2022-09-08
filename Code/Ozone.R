@@ -1,10 +1,9 @@
-source("initSim.R")
-dat <- read.table("../Data/ozone.dat", header=T)
+source("Code/initSim.R")
+dat <- read.table("Data/ozone.dat", header=T)
 qns <- c(0.35, 0.5, 0.65)
 k <- length(qns)
 mxm <- 10
 reps <- 1
-plotit <- TRUE
 takelog <- F
 M <- dat[,-1]
 colnames(M)[1] <- "y"
@@ -12,7 +11,7 @@ if(takelog)
   M$y <- log(1+M$y)
 M0 <- M
 set.seed(114322)
-sset <- sort(sample(1:330, 66))  #seq(5, length(M$y), by=5)
+sset <- sort(sample(1:330, 66))
 alphaQ <- 0.01
 res <- fitQRloop(M=M[-sset,], qn = qns, maxdeg = 6, minDiff = minDiff, maxrows = maxrows)
 

@@ -1,4 +1,4 @@
-source("initSim.R")
+source("Code/initSim.R")
 set.seed(211013)
 # Classification using quantile regression
 N <- 5000
@@ -32,7 +32,7 @@ res <- fitQRloop(M=M, qn = qns, maxdeg = maxdeg, minDiff = minDiff, maxrows = ma
 i <- 3
 colnames(M2) <-c("y","x1","x2")
 #pdf("../Figures/xorFit.pdf", width = 5, height = 5)
-plot(M2[,2],M2[,3], cex=0.3,pch=19, axes=F, xlab="x1", ylab="x2",
+plot(M2[,2],M2[,3], cex=0.3,pch=19, axes=F, xlab="x1", ylab="x2", main="QR",
      col=3+sign(predict(res$qremFit[[i]]$fitted.mod, newdata = M2)))
 axis(1); axis(2)
 abline(v=0, col="grey66", lwd=3)
@@ -54,7 +54,7 @@ ressvm <- table(pred2, y2)
 cat(1-sum(diag(ressvm))/sum(ressvm), "\n")
 
 misclssvm <- which(pred2 != as.factor(sign(y2)))
-plot(M2[,2],M2[,3], cex=0.3,pch=19, axes=F, xlab="x1", ylab="x2",
+plot(M2[,2],M2[,3], cex=0.3,pch=19, axes=F, xlab="x1", ylab="x2", main="SVM",
      col=3+sign(predict(res$qremFit[[i]]$fitted.mod, newdata = M2)))
 abline(v=0, col="grey66", lwd=3)
 abline(h=0, col="grey66", lwd=3)

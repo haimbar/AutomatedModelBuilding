@@ -10,6 +10,7 @@ pdf("Figures/Uni02.pdf", width=5, height=5)
 plot(x, y, cex=0.5, pch=19, col="grey66", axes=F)
 axis(1); axis(2); grid()
 for (i in 1:k) {
-  lines(sort(x), res$qremFit[[i]]$fitted.mod$fitted.values[order(x)], col=2)
+  lines(sort(x), res$qremFit[[i]]$fitted.mod$fitted.values[order(x)],
+        col=2)
 }
 dev.off()

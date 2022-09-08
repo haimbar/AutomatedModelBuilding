@@ -1,4 +1,4 @@
-source("initSim.R")
+source("Code/initSim.R")
 set.seed(211118)
 # data generation from Friedberg et al.:
 # equation 1

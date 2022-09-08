@@ -46,7 +46,10 @@ Rplots.pdf
 *.mw
 
 tmp
+generated
 serverPID*.txt
 Rdebug.txt
 R.config
 talk2stat.log
+nohup.out
+train.csv

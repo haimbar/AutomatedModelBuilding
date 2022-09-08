@@ -1,4 +1,4 @@
-source("initSim.R")
+source("Code/initSim.R")
 N <- 2000
 set.seed(211111)
 x <- runif(N, min=0, max=4*pi)

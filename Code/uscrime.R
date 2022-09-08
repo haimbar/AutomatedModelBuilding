@@ -1,5 +1,5 @@
-source("initSim.R")
-load("../Data/uscrime.rda")
+source("Code/initSim.R")
+load("Data/uscrime.rda")
 qns <- 1:19/20
 k <- length(qns)
 mxm <- 30

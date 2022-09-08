@@ -1,4 +1,5 @@
-source("initSim.R")
+source("Code/initSim.R")
+# takes several minutes to run
 set.seed(211013)
 
 # data generation from Friedberg et al.:

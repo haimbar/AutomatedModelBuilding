@@ -4,10 +4,10 @@
 
 # https://www.tensorflow.org/decision_forests/migration#validation_dataset
 
-source("initSim.R")
+source("Code/initSim.R")
 library(sampling)  
 
-mpgdat <- read.csv("../Data/auto-mpg.data", sep=",", header = F)
+mpgdat <- read.csv("Data/auto-mpg.data", sep=",", header = F)
 colnames(mpgdat) <- c('MPG', 'Cylinders', 'Displacement', 'Horsepower', 'Weight',
                       'Acceleration', 'Model Year', 'Origin')
 head(mpgdat)

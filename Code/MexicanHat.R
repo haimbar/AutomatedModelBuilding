@@ -1,5 +1,5 @@
 #https://en.wikipedia.org/wiki/Ricker_wavelet
-source("initSim.R")
+source("Code/initSim.R")
 set.seed(211013)
 
 N <- 5000

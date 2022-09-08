@@ -20,10 +20,10 @@
 
 \begin{document}
 \maketitle
-\abstract{This repository contains code and data used in the paper \textit{Automated Model Building and Goodness-of-fit via Quantile Regression} by Bar, Booth, and Wells. Given $P$ predictors $x_i$ and $n$ observations for each $x_i$ and the response variable $y$, the goal is to build a model, $y=f(x_1,\ldots,x_P)$ where $f()$ consists of combinations of powers of the $x_i$'s, which fits the data well across multiple quantiles.}
+\abstract{This repository contains code and data used in the paper \textit{Automated Model Building and Goodness-of-fit via Quantile Regression} by Bar, Booth, and Wells. Given $P$ predictors $x_i$ and $n$ observations for each $x_i$ and a response variable $y$, the goal is to build a model, $y=f(x_1,\ldots,x_P)$ where $f()$ consists of combinations of powers of the $x_i$'s, which fits the data well across multiple quantiles.}
 
 \section{Prerequisites}
-In order to run the code you must first install the \pkg{QREM} package. Since \pkg{QREM} has a model selection option for cases in which the number of predictors is large you also need to install the packages \pkg{edgefinder} and \pkg{SEMMS}:
+In order to run the code you must first install the \pkg{QREM} package. Since \pkg{QREM} has a model selection option for cases in which the number of predictors is large you also need to install the packages \pkg{edgefinder} and \pkg{SEMMS}. The recommended way to install these packages is from the GitHub repository:
 
 \begin{Verbatim}
 devtools::install_github("haimbar/edgefinder")
@@ -37,7 +37,7 @@ The model building algorithm is implemented in a function called \func{fitQRloop
  \item \textcolor{blue}{qns} The quantile which will be used in the fitting algorithm.
  \item \textcolor{blue}{minDiff} The minimal improvement in the overall goodness of fit in order to accept a new term.
  \item \textcolor{blue}{maxdeg} The maximum degree of any term in the model.
- \item \textcolor{blue}{maxrows} The maximum number of rows in the matrix of possible terms up to degree maxdeg.
+ \item \textcolor{blue}{maxrows} The maximum number of possible terms up to degree maxdeg.
 \end{itemize}
 The file initSim.R contains the values we used by default. It also contains three other variables which are used by \pkg{QREM} in the fitting process:
 \begin{itemize}
@@ -49,18 +49,66 @@ The file initSim.R contains the values we used by default. It also contains thre
 \showCode{R}{Code/initSim.R}[3][10]
 
 \section{A Univariate Example}
-The file Code/Univariate02.R  contains the code for example \#1 in the paper: 
-\showCode{R}{Code/Univariate02.R}[3][14]
+The file Code/Univariate02.R  contains the code for example \#1 in the paper, where $f(x)=x^{5}e^{-x}$ and the random noise is normally distributed with mean 0 and standard deviation which grows linearly with $x$, $sd=0.25(x+0.05)$.
+\showCode{R}{Code/Univariate02.R}[3][15]
 \runR{Code/Univariate02.R}{Univariate02}[cache]
-The fitted quantile regression models are shown as red curves in Figure \ref{Example1}.
+\noindent The fitted quantile regression models are shown as red curves in Figure \ref{Example1}.
 
 \begin{figure}[b!]
 \centering
 \includegraphics[width=.6\linewidth]{Figures/Uni02.pdf}
-\caption{Example 1: fitted QR model for $q=1/6,2/6/3/6,4/6,5/6$}\label{Example1}
+\caption{The fitted QR model for $q=1/6,\ldots,5/6$ where the true model is $f(x)=x^{5}e^{-x}$ with random errors i.i.d. $N(0, [0.25(x+0.05)]^2)$.}\label{Example1}
 \end{figure} 
  
 %\includeOutput{Univariate02}[tex]	
+
+
+\section{A Multivariate Example}
+The program in Code/multivariate04.R generates a data matrix with 2,000 observations and 4 predictors, but only $x_1, x_2, x_4$ are related to the response,
+$$y = x_1x_2x_4 + \epsilon$$
+and the random errors are i.i.d. $\epsilon\sim N(0, 0.1^2)$
+
+\showCode{R}{Code/multivariate04.R}[1][14]
+\runR{Code/multivariate04.R}{multivariate04}%[cache]
+
+The fitted model is: \inlnR{```cat(fittedModel)```}[vbox]
+\noindent The predicted values are very close to the observed one, as can be  seen in Figure \ref{multivariate04}.
+
+\begin{figure}[b!]
+\centering
+\includegraphics[width=.6\linewidth]{Figures/multivariate04.pdf}
+\caption{Fitted QR model vs. observed values for $q=1/2$ where the true model is $f(x_1, x_2, x_3, x_4)=x_1x_2x_4$ with random errors i.i.d. $N(0, 0.1^2)$.}\label{multivariate04}
+\end{figure} 
+
+Examples which involve more complicated models with more than one predictor may take a few minutes to run. 
+
+% The file Code/Friedberg7.R contains a multivariate example from the paper XXX, where the data matrix has 20 predictors, but only $x_1-x_5$ are related to the response,
+% $$y = 10sin(\pi x_1x_2) + 20(x_3-0.5)^2 + 10x_4 + 5x_5 + \epsilon$$
+% and the random errors are i.i.d. $\epsilon\sim N(0, 0.1^2)$
+% 
+% \showCode{R}{Code/Friedberg7.R}[10][19]
+% \runR{Code/Friedberg7.R}{Friedberg7}%[cache]
+% 
+% Note that this example which involves a more complicated model with five predictors take a few minutes to run. The fitted model is: \inlnR{```cat(fittedModel)```}[vbox]
+% \includeOutput{Friedberg7}[vbox]	
+% 
+% The algorithm did not select any variables which are not related to the response, and the terms in the fitted model represent the true model well. For example, $x_4$ and $x_5$ appear as linear terms in the model, and $x_3$ as quadratic. The combination of powers of $x_1$ and $x_2$ provide a good approximation for the $sin(\pi x_1x_2)$ term in the true model.
+% The predicted values are very close to the observed one, as can be  seen in Figure \ref{Friedberg7}
+% \showCode{R}{Code/Friedberg7.R}[22][26]
+% 
+% \begin{figure}[b!]
+% \centering
+% \includegraphics[width=.6\linewidth]{Figures/Friedberg7.pdf}
+% \caption{Fitted QR model vs. observed values for $q=1/2$}\label{Friedberg7}
+% \end{figure} 
+
+\section{Case Studies}
+The repositories contains several case studies:
+\begin{itemize}
+ \item Concrete.R - predicting the strength of concrete XXX. (Note that fitting a model to this dataset is time-consuming. Saved results can be found in concreteResultsR2s.RData)
+ \item mpgreg.R - which factors contribute to gasoline consumption. (We run it 10 times, and it takes a minute or two to finish). The file MPG.py contains a python program which uses TensorFlow to fit the MPG data. The code was obtained from the TensorFlow documentation.
+\end{itemize}
+
 
 
 %\clearpage

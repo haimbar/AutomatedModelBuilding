@@ -21,23 +21,21 @@
 * DependentPredictors01.R
 
 * Friedberg1.R
-* Friedberg7.R
-* Friedberg26.R
+* Friedberg7.R  (takes a few minutes to run)
+* Friedberg26.R  (takes longer to run)
 
-* classification01.R
+* classification01.R  (includes a comparison with SVM)
 
 
 ### Case studies:
-* Concrete.R
-* concreteResultsR2s.RData  (results from Concrete.R)
-* mpgreg.R
-* MPG.py (using python's tensorflow for the MPG data)
-* bankNotes.R
+* Concrete.R (we run it 10 times, and it takes a while to finish)
+* concreteResultsR2s.RData  (saved results from Concrete.R)
+* mpgreg.R  (we run it 10 times, and it takes a minute or two to finish)
+* MPG.py (using python's tensorflow for the MPG data. Code obtained from the TensorFlow documentation.)
+* bankNotes.R (a classification example)
 
 * Ozone.R
 * Lidar.R
 * uscrime.R
 * mcycle.R
 * Pulsar.R
-ODEs.R
-helix.R

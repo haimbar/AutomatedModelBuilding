@@ -1,7 +1,5 @@
-
-source("initSim.R")
+source("Code/initSim.R")
 set.seed(211013)
-
 N <- 8000
 maxdeg <- 10
 mxm <- 20
@@ -14,7 +12,6 @@ colnames(M0) <- c("y", "x1", "x2", "x3")
 sset <- 1:6000
 M <- M0[sset,]
 res <- fitQRloop(M=M, qn = qns, maxdeg = maxdeg, minDiff = minDiff, maxrows = maxrows)
-
 res$qremFit[[3]]$fitted.mod$fitted.values
 i <- which(qns == 0.5)
 plot(M0$y[-sset], predict(res$qremFit[[i]]$fitted.mod, newdata=M0[-sset,]),
