@@ -25,7 +25,7 @@
 \abstract{This repository contains code and data used in the paper \textit{Automated Model Building and Goodness-of-fit via Quantile Regression} by Bar, Booth, and Wells (in preparation). Given $P$ predictors $x_i$ and $n$ observations for each $x_i$ and a response variable $y$, the goal is to build a model, $y=f(x_1,\ldots,x_P)$ where $f()$ consists of combinations of powers of the $x_i$'s, which fits the data well across multiple quantiles.}
 
 \section{Prerequisites}
-In order to run the code you must first install the \pkg{QREM} package. Since \pkg{QREM} has a model selection option for cases in which the number of predictors is large you also need to install the packages \pkg{edgefinder} and \pkg{SEMMS}. The recommended way to install these packages is from the GitHub repository:
+In order to run the code you must first install the \pkg{QREM} package \cite{QREM}. Since \pkg{QREM} has a model selection option for cases in which the number of predictors is large you also need to install the packages \pkg{edgefinder} \cite{PlosOne2021} and \pkg{SEMMS} \cite{SEMMS}. The recommended way to install these packages is from the GitHub repository:
 
 \begin{Verbatim}
 devtools::install_github("haimbar/edgefinder")
@@ -53,12 +53,12 @@ The file initSim.R contains the values we used by default. It also contains thre
 \section{A Univariate Example}
 The file Code/Univariate02.R  contains the code for example \#1 in the paper, where $$f(x)=x^{5}e^{-x}$$ and the random noise is normally distributed with mean 0 and standard deviation which grows linearly with $x$, $sd=0.25(x+0.05)$.
 \showCode{R}{Code/Univariate02.R}%[1][15]
-\runR{Code/Univariate02.R}{Univariate02}[cache]
+\runR{Code/Univariate02.R}{Univariate02}%[cache]
 The fitting algorithm is invoked in the line denoted by \small\dcircle{1} in the code above. The five fitted quantile regression models are shown as red curves in Figure \ref{Example1}.
 
 %\ref{fitcmnt}
 
-\begin{figure}[t!]
+\begin{figure}[b!]
 \centering
 \includegraphics[width=.5\linewidth]{Figures/Uni02.pdf}
 \caption{The fitted QR model for $q=1/6,\ldots,5/6$ where the true model is $f(x)=x^{5}e^{-x}$ with random errors i.i.d. $N(0, [0.25(x+0.05)]^2)$.}\label{Example1}
@@ -110,15 +110,15 @@ Examples which involve more complicated models with more than one predictor may 
 \section{Case Studies}
 The repository contains several case studies:
 \begin{itemize}
- \item Concrete.R - predicting the strength of concrete. (Note that fitting a model to this dataset is time-consuming. Saved results can be found in concreteResultsR2s.RData).
- \item mpgreg.R - which factors contribute to gasoline consumption. (We run it 10 times, and it takes a minute or two to finish). The file MPG.py contains a python program which uses TensorFlow to fit the MPG data. The code was obtained from the TensorFlow documentation.
- \item bankNotes.R (a classification example, see \url{https://archive.ics.uci.edu/ml/datasets/}banknote+authentication).
+ \item Concrete.R - predicting the strength of concrete \cite{YEH2006}. (Note that fitting a model to this dataset is time-consuming. Saved results can be found in concreteResultsR2s.RData).
+ \item mpgreg.R - which factors contribute to gasoline consumption. (We run it 10 times, and it takes a minute or two to finish). The file MPG.py contains a python program which uses TensorFlow to fit the MPG data. The code was obtained from the TensorFlow documentation \url{https://www.tensorflow.org/tutorials/keras/regression}.
+ \item bankNotes.R (a classification example, see \cite{Lohweg2006,Dua2019} \url{https://archive.ics.uci.edu/ml/datasets/}banknote+authentication).
  \item Lidar.R - Lidar readings data (univariate, demonstrating data augmentation).
  \item uscrime.R - FBI rape rate data by state (demonstraing regression discontinuity).
- \item Ozone.R - Ozone data.
+ \item Ozone.R - Ozone data \cite{lee:neld:pawi:2006}.
 \end{itemize}
 
-In this section we use the MPG data
+In this section we use the MPG data which has 7 predictors which we use to obtain a prediction for the miles-per-gallon variable. We convert the Cylinders predictor to a factor with three levels, and scale the other 6 predictors.
 \runR{Code/mpgreg.R}{mpg}%[cache]
 
 The fitted model is: \inlnR{```print(summCoef, digits = 3)```}[vbox]
@@ -146,7 +146,8 @@ The fitted model is: \inlnR{```print(summCoef, digits = 3)```}[vbox]
 % \end{figure} 
 
 %\clearpage
-\bibliographystyle{abbrvnat}
+\bibliographystyle{abbrv}
+\bibliography{ModelBuilding}
 % \begin{thebibliography}{99}
 % \bibitem{SEMMS}
 % {\rm Bar, H.~Y., Booth, J.~G., {\rm and} Wells, M.~T.} (2020).
@@ -155,15 +156,3 @@ The fitted model is: \inlnR{```print(summCoef, digits = 3)```}[vbox]
 % \newblock \emph{Journal of Computational and Graphical Statistics}, {\bf  0}\penalty0 (0), \penalty0 1--12.
 % \end{thebibliography}
 \end{document}
-
-cite 
-QREM 
-edgefinder 
-SEMMS
-concrete
-mpg
-banknotes
-Lidar
-uscrime
-Ozone
-
