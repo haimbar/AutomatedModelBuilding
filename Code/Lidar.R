@@ -1,9 +1,9 @@
-source("initSim.R")
+source("Code/initSim.R")
 mxm <- 20
 reps <- 20
 qns <- seq(0.4,0.6,by=0.1)
 k <- length(qns)
-dat <- read.csv("../Data/lidar.txt",header=FALSE)
+dat <- read.csv("Data/lidar.txt",header=FALSE)
 x <- scale(dat[,1])
 y <- dat[,2]
 # augment:

@@ -12,8 +12,8 @@ colnames(mpgdat) <- c('MPG', 'Cylinders', 'Displacement', 'Horsepower', 'Weight'
                       'Acceleration', 'Model Year', 'Origin')
 head(mpgdat)
 M <- as.data.frame(mpgdat)
-colnames(M) <- c("y", paste0("x",1:7))
-M[,3:7] <- apply(M[,3:7],2,scale)
+colnames(M) <- c("y", paste0("x", 1:7))
+M[,3:7] <- apply(M[,3:7], 2, scale)
 M$x1 <- cut(M$x1,breaks = c(0,4.5, 6.5, 8.5))
 M$x7 <- as.factor(M$x7)
 M0 <- M
@@ -34,9 +34,9 @@ for (repno in 1:reps) {
   res[[repno]] <- fitQRloop(M=M, qn = qns, maxdeg = 6, minDiff = minDiff, maxrows = maxrows)
   trueY <- M0$y[-sset]
   predY <- predict(res[[repno]]$qremFit[[j]]$fitted.mod, newdata=M0[-sset,])
-  plot(trueY, predY,pch=19,cex=0.7, col=4, main=repno, xlim=c(0,50),
-       ylim=c(0,50), axes=F, xlab="Actual MPG", ylab="Predicted MPG")
-  abline(0,1,col=2,lwd=4); axis(1); axis(2); grid()
+  # plot(trueY, predY,pch=19,cex=0.7, col=4, main=repno, xlim=c(0,50),
+  #      ylim=c(0,50), axes=F, xlab="Actual MPG", ylab="Predicted MPG")
+  # abline(0,1,col=2,lwd=4); axis(1); axis(2); grid()
   summlm <- summary(lm(predY ~ trueY))
   print(summlm)
   r2s[repno] <- summlm$r.squared
@@ -44,21 +44,24 @@ for (repno in 1:reps) {
   mae[repno] <- mean(abs(trueY - predY))
 }
 
-plot(mae, ylim=c(0,3))
+# plot(mae, ylim=c(0,3))
 minmae <- which.min(mae)
 cat(minmae,mae[minmae],"\n")
 print(res[[minmae]]$frmlterms)
 
 trueY <- M0$y[-sset]
 predY <- predict(res[[minmae]]$qremFit[[j]]$fitted.mod, newdata=M0[-sset,])
+pdf("Figures/mpg.pdf", width=5, height=5)
 plot(trueY, predY,pch=19,cex=0.7, col=4, main="", xlim=c(0,50),
      ylim=c(0,50), axes=F, xlab="Actual MPG", ylab="Predicted MPG")
 abline(0,1,col=2,lwd=4); axis(1); axis(2); grid()
+dev.off()
 
+summCoef <- summary(res[[minmae]]$qremFit[[j]]$fitted.mod)$coef
 
 #Looks like year is highly non-linear, but it could be because it is confounded with origin
-plot(M0$x3[-sset], M0$y[-sset], cex=0.6, pch=19)
-points(M0$x3[-sset],predict(res[[minmae]]$qremFit[[2]]$fitted.mod,newdata=M0[-sset,]), cex=0.7,col=2, pch=17)
+# plot(M0$x3[-sset], M0$y[-sset], cex=0.6, pch=19)
+# points(M0$x3[-sset],predict(res[[minmae]]$qremFit[[2]]$fitted.mod,newdata=M0[-sset,]), cex=0.7,col=2, pch=17)
 
 print(table(mpgdat$`Model Year`,mpgdat$Origin))
 print(table(mpgdat$`Model Year`,mpgdat$Cylinders))

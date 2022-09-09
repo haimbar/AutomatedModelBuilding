@@ -7,8 +7,8 @@ reps <- 1
 takelog <- F
 M <- dat[,-1]
 colnames(M)[1] <- "y"
-if(takelog)
-  M$y <- log(1+M$y)
+if(takelog)         # can log-transform the data, but with QR it's not necessary
+  M$y <- log(1+M$y) # since we don't assume normal errors.
 M0 <- M
 set.seed(114322)
 sset <- sort(sample(1:330, 66))
@@ -22,11 +22,14 @@ predY <- exp(predict(res$qremFit[[2]]$fitted.mod, newdata=M0[sset,]))-1
 } else{
   trueY <- M0$y[sset]
   predY <- predict(res$qremFit[[2]]$fitted.mod, newdata=M0[sset,])
-  
 }
 axlim <- max(predY, trueY)
-plot(trueY, predY,pch=19,cex=0.7, col=4, main="Ozone", xlim=c(0, axlim),
+pdf("Figures/O3.pdf", width=5, height=5)
+plot(trueY, predY, pch=19, cex=0.7, col=4, main="Ozone", xlim=c(0, axlim),
      ylim=c(0, axlim), axes=F, xlab="Actual O3", ylab="Predicted O3")
 abline(0,1,col=2,lwd=4); axis(1); axis(2); grid()
+dev.off()
 #summlm <- summary(lm(predY ~ trueY))
 #print(summlm)
+
+summCoef <- summary(res$qremFit[[2]]$fitted.mod)$coef

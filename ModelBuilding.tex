@@ -105,11 +105,40 @@ Examples which involve more complicated models with more than one predictor may 
 \section{Case Studies}
 The repositories contains several case studies:
 \begin{itemize}
- \item Concrete.R - predicting the strength of concrete XXX. (Note that fitting a model to this dataset is time-consuming. Saved results can be found in concreteResultsR2s.RData)
+ \item Concrete.R - predicting the strength of concrete XXX. (Note that fitting a model to this dataset is time-consuming. Saved results can be found in concreteResultsR2s.RData).
  \item mpgreg.R - which factors contribute to gasoline consumption. (We run it 10 times, and it takes a minute or two to finish). The file MPG.py contains a python program which uses TensorFlow to fit the MPG data. The code was obtained from the TensorFlow documentation.
+ \item bankNotes.R (a classification example, see https://archive.ics.uci.edu/ml/datasets/banknote+authentication).
+ \item Lidar.R - Lidar readings data (univariate, demonstrating data augmentation).
+ \item uscrime.R - FBI rape rate data by state (demonstraing regression discontinuity).
+ \item Ozone.R - Ozone data.
 \end{itemize}
 
+In this section we use the MPG data
+\runR{Code/mpgreg.R}{mpg}%[cache]
 
+The fitted model is: \inlnR{```print(summCoef, digits = 3)```}[vbox]
+\noindent The predicted values are plotted versus the observed one in Figure \ref{mpgplot}.
+
+\begin{figure}[b!]
+\centering
+\includegraphics[width=.6\linewidth]{Figures/mpg.pdf}
+\caption{Fitted QR model vs. observed values for $q=1/2$ for the MPG data.}\label{mpgplot}
+\end{figure} 
+
+
+% In this section we use the ozone data 
+% 
+% \runR{Code/Ozone.R}{O3}%[cache]
+% 
+% 
+% The fitted model is: \inlnR{```print(summCoef, digits = 3)```}[vbox]
+% \noindent The predicted values are very close to the observed one, as can be  seen in Figure \ref{multivariate04}.
+% 
+% \begin{figure}[b!]
+% \centering
+% \includegraphics[width=.6\linewidth]{Figures/O3.pdf}
+% \caption{Fitted QR model vs. observed values for $q=1/2$ for the ozone data.}\label{O3}
+% \end{figure} 
 
 %\clearpage
 \bibliographystyle{abbrvnat}
