@@ -33,9 +33,6 @@
 * mpgreg.R  (we run it 10 times, and it takes a minute or two to finish)
 * MPG.py (using python's tensorflow for the MPG data. Code obtained from the TensorFlow documentation.)
 * bankNotes.R (a classification example)
-
 * Ozone.R
 * Lidar.R
 * uscrime.R
-* mcycle.R
-* Pulsar.R
