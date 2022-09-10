@@ -12,7 +12,14 @@ devtools::install_github("haimbar/QREM")
 
 See more detailed documentation in the [pdf file](https://github.com/haimbar/AutomatedModelBuilding/blob/main/ModelBuilding.pdf) in the [repository's main folder](https://github.com/haimbar/AutomatedModelBuilding).
 
-<img src="Figures/F1.jpeg" width="200" height="200" align="left">
-<img src="Figures/D1.jpeg" width="300" align="center">
-<img src="Figures/MPG.pdf" width="200" height="200" align="right">
-
+<div class="row">
+  <div class="column">
+    <img src="Figures/F1.jpeg" width="200" height="200">
+  </div>
+  <div class="column">
+    <img src="Figures/d1.jpeg" height="200">
+  </div>
+  <div class="column">
+    <img src="Figures/mpg.pdf" width="200" height="200">
+  </div>
+</div>
